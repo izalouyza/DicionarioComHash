@@ -2,14 +2,16 @@
 
 Este repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto consiste em desenvolver um dicionário digital onde o usuário pode cadastrar palavras e seus significados, buscar e remover termos.
 
-Nesta **sétima versão**, o sistema apresenta:
+O sistema de dicionário digital apresenta:
 
-- Implementação básica de **tabela hash** para armazenamento das palavras, usando sondagem linear para tratamento de colisões.
-- Menu funcional para **cadastrar**, **exibir**, **buscar** e **remover** palavras do dicionário.
-- Persistência dos dados em arquivo texto (`texto.txt`), com carregamento na inicialização e salvamento ao sair.
-- Estrutura simplificada onde cada palavra possui um único significado.
+- Função **Hash_String** que calcula o hash pela soma dos códigos ASCII dos caracteres da palavra.
+- Implementação de **tratamento de colisões** com sondagem linear e aviso de colisão.
+- Persistência completa dos dados em arquivo texto (`texto.txt`), com carregamento na inicialização e salvamento ao sair.
+- Funcionalidades completas para **cadastrar**, **exibir**, **buscar** e **remover** palavras.
+- Interface amigável com mensagens específicas para sucesso, erro, colisão e item não encontrado.
+- Estrutura simplificada, onde cada palavra possui um único significado.
 - Inicialização da tabela com valores vazios para evitar dados inconsistentes.
-- Tratamento de entrada de dados com limpeza do buffer para evitar erros na leitura.
+- Tratamento adequado de entrada de dados e limpeza do buffer para evitar erros na leitura.
 
 ---
 ## 👨‍👧‍👧 Autores
@@ -17,22 +19,21 @@ Nesta **sétima versão**, o sistema apresenta:
 👨‍🏫 **Professor:** Kennedy Reurison Lopes
 
 👩‍🎓 **Discentes:**  
-🔹 [Izadora Louyza Silva Figueiredo](https://github.com/liyuhi)  
-🔹 [Lívian Maria Lucena Gomes Pinheiro](https://github.com/livianlucena)   
-🔹 [Victor Hugo de Oliveira](https://github.com/Victor350br)
+🔹 [Izadora Louyza Silva Figueiredo](https://github.com/liyuhi) — *GitMaster*  
+🔹 [Lívian Maria Lucena Gomes Pinheiro](https://github.com/livianlucena) — *Redatora e Apresentadora*  
+🔹 [Victor Hugo de Oliveira](https://github.com/Victor350br) — *Codificador e Apresentador*
 
 ---
 
 ## 1. Funcionalidades
 
-| Funcionalidade | Descrição                                                                            |
-|----------------|-------------------------------------------------------------------------------------|
-| Cadastrar      | Adiciona uma nova palavra e seu significado na tabela hash, com tratamento de colisão.|
-| Exibir         | Exibe todas as palavras e significados armazenados na tabela hash.                   |
-| Buscar         | Pesquisa por uma palavra na tabela hash, exibindo seu significado, se encontrada.    |
-| Remover        | Remove uma palavra do dicionário, liberando a posição na tabela hash.                |
-| Sair           | Salva o conteúdo do dicionário em arquivo texto (`texto.txt`) e encerra o programa.  |
-
+| Funcionalidade | Descrição                                                                                  |
+|----------------|-------------------------------------------------------------------------------------------|
+| Cadastrar      | Adiciona uma nova palavra e seu significado na tabela hash, tratando colisões com sondagem linear. |
+| Exibir         | Exibe todas as palavras e significados armazenados na tabela hash.                         |
+| Buscar         | Pesquisa por uma palavra na tabela hash, exibindo seu significado, se encontrada.          |
+| Remover        | Remove uma palavra do dicionário, liberando a posição na tabela hash.                      |
+| Sair           | Salva o conteúdo do dicionário em arquivo texto (`texto.txt`) e encerra o programa.       |
 
 ---
 
@@ -62,13 +63,14 @@ O usuário interage com o sistema via menu no terminal:
 ### 2.2 Estrutura de pastas
 ```
 DicionarioComHash/
-├── dicionariohash/ # Código-fonte principal
-│ └── main.c # Código da sétima versão com remoção e persistência
-├── texto.txt # Arquivo texto onde os dados são salvos
-├── README.md # Documentação atualizada do projeto
+├── dicionariohash/ 
+│ └── main.c 
+└── README.md 
 
 ```
+- **main.c**: código-fonte principal.
 
+---
 ### 2.3 Funcionamento do sistema
 
 O sistema de Dicionário Digital permite que o usuário realize as seguintes ações:
@@ -128,14 +130,4 @@ gcc -o dicionario main.c
 ```
 .\dicionario
 ```
----
-
-### 4. Próximos Passos
-
-- Implementar suporte a **múltiplos significados** por palavra.  
-- Melhorar a função de hash para distribuir melhor as palavras.  
-- Tratar casos de tabela cheia e evitar loops infinitos na inserção, busca e remoção.  
-- Implementar atualização de palavras e seus significados.  
-- Melhorar a interface do usuário e validações.
-
 ---
