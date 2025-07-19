@@ -34,19 +34,6 @@ O usuário interage via menu no terminal, podendo escolher entre as opções dis
 ### 2.1 Exemplo de Fluxo de Uso
 
 ---
-=======
-## 💡 Funcionalidades
-
-| Funcionalidade | Características                                                                                         |
-|----------------|--------------------------------------------------------------------------------------------------------|
-| Cadastrar      | Adiciona uma nova palavra ao dicionário eletrônico.                                                    |
-|                | *(Atualmente, a função `cadastro()` está implementada apenas como placeholder com impressão na tela.)* |
-| Remover        | Remove uma palavra do dicionário.                                                                      |
-|                | *(A função `remover()` ainda está em desenvolvimento.) *                                              |
-| Exibir         | Mostra todas as palavras cadastradas.                                                                 |
-|                | *(A função `exibir()` ainda será implementada com a estrutura de dados adequada.)*                     |
-| Sair           | Encerra a execução do programa.                                                                        |
-
 
 ### 2.2 Estrutura de pastas
 ```
