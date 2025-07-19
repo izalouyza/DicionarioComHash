@@ -1,11 +1,16 @@
 # Dicionário com Hash
 
-Este repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto consiste em desenvolver um dicionário digital onde o usuário pode cadastrar palavras e seus significados, buscar e remover termos.  
+Este repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto consiste em desenvolver um dicionário digital onde o usuário pode cadastrar palavras e seus significados, buscar e remover termos.
 
-Nesta **quinta versão**, o sistema foi aprimorado com:
-- Suporte mais robusto a **múltiplos significados** por palavra, com uso de listas encadeadas dentro da estrutura de cada entrada.
-- Implementação completa da **persistência de dados**, com carregamento do dicionário a partir de um arquivo texto na inicialização e salvamento automático ao final.
-- Estrutura modular para futura aplicação de uma **tabela hash** para otimizar buscas e remoções.
+Nesta **sexta versão**, o sistema apresenta:
+
+- Implementação básica de **tabela hash** para armazenamento das palavras, usando sondagem linear para tratamento de colisões.
+- Menu funcional para **cadastrar**, **exibir** e **buscar** palavras no dicionário.
+- Estrutura simplificada onde cada palavra possui um único significado.
+- Inicialização da tabela com valores vazios para evitar dados inconsistentes.
+- Tratamento de entrada de dados com limpeza do buffer para evitar erros na leitura.
+- Preparação para futuras melhorias, como suporte a múltiplos significados e persistência em arquivo.
+
 
 ---
 ## 👨‍👧‍👧 Autores
@@ -21,37 +26,33 @@ Nesta **quinta versão**, o sistema foi aprimorado com:
 
 ## 1. Funcionalidades
 
-| Funcionalidade | Descrição                                                                                                     |
-|----------------|--------------------------------------------------------------------------------------------------------------|
-| Cadastrar      | Adiciona uma nova palavra ao dicionário, permitindo múltiplos significados por palavra.                      |
-| Remover        | Remove uma palavra do dicionário com confirmação do usuário.                                                 |
-| Exibir         | Exibe todas as palavras cadastradas e seus significados.                                                     |
-| Atualizar      | Permite acrescentar novos significados a uma palavra já existente.                                           |
-| Buscar         | (A ser implementado) Permitirá procurar palavras usando tabela hash.                                         |
-| Salvar         | Salva o conteúdo do dicionário em arquivo texto (`Texto.txt`).                                               |
-| Carregar       | Carrega o conteúdo salvo do arquivo texto ao iniciar o programa.                                             |
-| Sair           | Salva automaticamente os dados e encerra a execução do programa.                                             |
+| Funcionalidade | Descrição                                                                            |
+|----------------|-------------------------------------------------------------------------------------|
+| Cadastrar      | Adiciona uma nova palavra e seu significado na tabela hash, com tratamento de colisão.|
+| Exibir         | Exibe todas as palavras e significados armazenados na tabela hash.                   |
+| Buscar         | Pesquisa por uma palavra na tabela hash, exibindo seu significado, se encontrada.    |
+| Sair           | Encerra o programa. (Ainda sem salvar em arquivo nesta versão)                      |
 
 ---
 
 ## 2. Funcionamento do Sistema
 
-O usuário interage através de um menu no terminal com as seguintes opções:
+O usuário interage com o sistema via menu no terminal:
 
-- **Cadastrar**: adiciona uma nova palavra e um significado associado.
-- **Atualizar**: permite adicionar novos significados a uma palavra já existente.
-- **Remover**: exclui completamente uma palavra do dicionário.
-- **Exibir**: mostra o conteúdo atual da estrutura em memória.
-- **Sair**: salva os dados no arquivo e encerra o programa.
+- **Cadastrar**: inserir uma palavra e seu significado.
+- **Exibir**: listar todas as palavras cadastradas e seus significados.
+- **Buscar**: procurar uma palavra pelo nome e exibir seu significado.
+- **Sair**: finaliza o programa.
 
 ---
 
-### 2.1 Exemplo de Fluxo de Uso
+### 2.1 Exemplo de fluxo de uso
 
-- O usuário inicia o programa, que automaticamente carrega os dados salvos.
-- O usuário pode cadastrar uma nova palavra com seus significados.
-- Também é possível remover palavras, exibir todas as registradas ou adicionar significados adicionais.
-- Ao sair, o programa salva todas as alterações no arquivo `texto.txt`.
+- O usuário inicia o programa e recebe o menu.
+- Pode cadastrar novas palavras com significado.
+- Exibir o conteúdo da tabela hash a qualquer momento.
+- Buscar uma palavra específica.
+- Sair do programa.
 
 ---
 
@@ -59,9 +60,8 @@ O usuário interage através de um menu no terminal com as seguintes opções:
 ```
 DicionarioComHash/
 ├── dicionariohash/ # Código-fonte principal
-│ └── main.c # Código do dicionário com lista encadeada
-├── texto.txt # Arquivo texto onde os dados são salvos
-├── README.md # Documentação do projeto
+│ └── main.c # Código da sexta versão com hash simples
+├── README.md # Documentação atualizada do projeto
 
 ```
 
@@ -73,11 +73,9 @@ O sistema de Dicionário Digital permite que o usuário realize as seguintes aç
 =========================== DICIONÁRIO DIGITAL ===========================
 
 (1) Cadastrar
-(2) Remover
-(3) Exibir
-(4) Atualizar
-(5) Buscar
-(6) Sair 
+(2) Exibir
+(3) Buscar
+(4) Sair
 
 << Informe a opção:
 
@@ -85,12 +83,10 @@ O sistema de Dicionário Digital permite que o usuário realize as seguintes aç
 
 #### Menu principal do sistema:
 
-- **Cadastrar**: o sistema permite cadastrar uma nova palavra e seus significados no dicionário, armazenando-os na lista encadeada.  
-- **Remover**: o sistema permite remover uma palavra existente, solicitando confirmação antes da exclusão.  
-- **Exibir**: o sistema exibe todas as palavras e seus significados atualmente armazenados na lista e no arquivo texto.  
-- **Atualizar**: o sistema permite adicionar mais significados a uma palavra já existente.  
-- **Buscar**: *(em desenvolvimento)* — a função permitirá localizar rapidamente uma palavra, otimizando o acesso com estrutura de hash.  
-- **Sair**: o sistema salva todos os dados da lista no arquivo texto para garantir persistência e encerra a execução do programa.
+- **Cadastrar**: inserir uma palavra e seu significado.  
+- **Exibir**: listar todas as palavras cadastradas e seus significados.  
+- **Buscar**: procurar uma palavra pelo nome e exibir seu significado.  
+- **Sair**: finaliza o programa.
 ---
 
 ### 3. Como compilar e executar o sistema
@@ -129,8 +125,11 @@ gcc -o dicionario main.c
 
 ### 4. Próximos Passos
 
-- Implementar a função **Buscar** utilizando **tabela hash**.
-- Aplicar **função de espalhamento** (hash function) para distribuição eficiente das palavras.
-- Melhorar o sistema de atualização para suporte a edição completa de significados e palavras.
+- Implementar suporte a **múltiplos significados** por palavra.
+- Adicionar persistência de dados com leitura e gravação em arquivo.
+- Melhorar a função de hash para distribuir melhor as palavras.
+- Tratar casos de tabela cheia e evitar loops infinitos na inserção e busca.
+- Implementar remoção e atualização de palavras/significados.
+- Melhorar a interface do usuário e validações.
 
 ---
