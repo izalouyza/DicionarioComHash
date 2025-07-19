@@ -68,7 +68,7 @@ DicionarioComHash/
 └── README.md 
 
 ```
-- **main.c**: código-fonte principal.
+- **main.c**: código-fonte do projeto.
 
 ---
 ### 2.3 Funcionamento do sistema
