@@ -1,6 +1,6 @@
 # Dicionário com Hash
 
-Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto é destinado a desenvolver um dicionário utilizando a estrutura de dados hash. 
+Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto é destinado a desenvolver um dicionário utilizando a estrutura de dados hash, com funcionalidades para cadastrar, remover, exibir palavras e seus significados, armazenando os dados em arquivo texto.
 
 ---
 ## 👨‍👧‍👧 Autores
@@ -16,6 +16,25 @@ Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. 
 
 ## 1. Funcionalidades
 
+| Funcionalidade | Características                                                                                           |
+|----------------|----------------------------------------------------------------------------------------------------------|
+| Cadastrar      | Permite adicionar uma nova palavra e seu significado ao dicionário, salvando os dados em arquivo texto. |
+| Remover        | (Em desenvolvimento) Permite remover uma palavra do dicionário.                                         |
+| Exibir         | Exibe todas as palavras e significados cadastrados, lendo os dados do arquivo texto.                     |
+| Sair           | Encerra a execução do programa.                                                                          |
+
+---
+
+## 2. Como o sistema funciona?
+
+O usuário interage via menu no terminal, podendo escolher entre as opções disponíveis (Cadastrar, Remover, Exibir, Sair). As palavras e significados cadastrados são armazenados em um arquivo texto chamado `Texto.txt`, permitindo persistência dos dados entre execuções.
+
+---
+
+### 2.1 Exemplo de Fluxo de Uso
+
+---
+=======
 ## 💡 Funcionalidades
 
 | Funcionalidade | Características                                                                                         |
@@ -28,19 +47,13 @@ Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. 
 |                | *(A função `exibir()` ainda será implementada com a estrutura de dados adequada.)*                     |
 | Sair           | Encerra a execução do programa.                                                                        |
 
-## 2. Como o sistema funciona?
-
-O usuário terá acesso a uma interface interativa onde poderá visualizar as funcionalidades disponíveis e interagir com o sistema. 
-
-### 2.1 Exemplo de Fluxo de Uso
-
 
 ### 2.2 Estrutura de pastas
 ```
 DicionarioComHash/
-├── dicionariohash/        # Pasta com o código-fonte principal
-│   └── main.c             # Código do menu principal do dicionário
-├── README.md              # Documentação inicial do projeto
+├── dicionariohash/ # Pasta com o código-fonte principal
+│ └── main.c # Código do dicionário com funções de cadastro, remoção e exibição
+├── README.md # Documentação inicial do projeto
 ```
 
 ### 2.3 Funcionamento do sistema
