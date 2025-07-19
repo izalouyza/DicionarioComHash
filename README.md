@@ -34,14 +34,28 @@ O usuário interage via menu no terminal, podendo escolher entre as opções dis
 ### 2.1 Exemplo de Fluxo de Uso
 
 ---
+=======
+## 💡 Funcionalidades
+
+| Funcionalidade | Características                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------|
+| Cadastrar      | Adiciona uma nova palavra ao dicionário eletrônico.                                                    |
+|                | *(Atualmente, a função `cadastro()` está implementada apenas como placeholder com impressão na tela.)* |
+| Remover        | Remove uma palavra do dicionário.                                                                      |
+|                | *(A função `remover()` ainda está em desenvolvimento.) *                                              |
+| Exibir         | Mostra todas as palavras cadastradas.                                                                 |
+|                | *(A função `exibir()` ainda será implementada com a estrutura de dados adequada.)*                     |
+| Sair           | Encerra a execução do programa.                                                                        |
+
 
 ### 2.2 Estrutura de pastas
 ```
 DicionarioComHash/
 ├── dicionariohash/ # Pasta com o código-fonte principal
-│ └── main.c # Código do dicionário digital com funções de cadastro, remoção e exibição
+│ └── main.c # Código do dicionário com funções de cadastro, remoção e exibição
 ├── README.md # Documentação inicial do projeto
 ```
+
 ### 2.3 Funcionamento do sistema
 
 
@@ -77,3 +91,4 @@ gcc -o dicionario main.c
 ```
 .\dicionario
 ```
+
