@@ -1,11 +1,32 @@
+/* Aplicar tabelas hash em uma aplicação real e Manipular dados textuais usando hashing.
+Crie um programa que funcione como um dicionário: o usuário pode adicionar palavras e seus
+significados, buscar e remover termos. Utilize uma tabela hash para organizar os dados.
+
+EXTRAS OPCIONAIS
+-> Salvar e carregar o dicionário de um arquivo; (OK)
+-> Suportar múltiplos significados por palavra.
+
+CRITÉRIOS DE AVALIAÇÃO:
+? Funcionamento correto das operações (30%)
+? Uso eficaz de hash (20%)
+? Interface amigável no terminal (20%)
+? Relatório com análise e exemplos (30%)
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
 
-#define succ "\n>> Operação realizada com sucesso.\n\n"
-#define fail "\n>> Algo deu errado, tente novamente.\n\n"
-#define empt "\n>> Nenhum item encontrado no momento.\n\n"
+void mens(char par){
+    switch (par){
+        case 's': printf("\n>> Operação realizada com sucesso.\n\n");    break;
+        case 'f': printf("\n>> Algo deu errado, tente novamente.\n\n");  break;
+        case 'e': printf("\n>> Nenhum item encontrado no momento.\n\n"); break;
+        case 'c': printf("\n>> ATENÇÃO: Ocorrência de colisão.\n\n");    break;
+        default:  printf("\n>> (Parâmetro errado)\n\n");
+    }
+}
 
 #define size_word 50
 #define size_mean 100
@@ -18,11 +39,12 @@ typedef struct palavra{
 
 palavra hash_table[size_hash];
 
-void mens(char par);
 void Save();
 void Load();
+int Hash_String(const char *word);
+int Collision_Handler(int indice);
 int MakeHashCode(int chave);
-palavra GetWords();
+palavra GetInputValue();
 void Insert();
 void PrintHash();
 void Search();
@@ -32,8 +54,7 @@ int main(){
     setlocale(LC_ALL, "");
     Load();
     char opc = ' ';
-
-    while(opc != '5'){
+    do{
         printf("\n================ DICIONARIO DIGITAL ================\n");
         printf("[1] Cadastrar\n[2] Exibir \n[3] Buscar \n[4] Remover \n[5] Sair \n>> ");
         scanf("%c", &opc);
@@ -46,7 +67,7 @@ int main(){
             case '5':             Save();     break;
             default:           mens('f');     break;
         }
-    }
+    }while(opc != '5');
     return 0;
 }
 
@@ -54,12 +75,19 @@ int MakeHashCode(int chave){
     return (chave % size_hash);
 }
 
-void mens(char par){
-    switch (par){
-        case 's': printf("%s", succ); break;
-        case 'f': printf("%s", fail); break;
-        case 'e': printf("%s", empt); break;
+int Collision_Handler(int indice){
+    mens('c');
+    return MakeHashCode(indice + 1);
+}
+
+int Hash_String(const char *word){
+    int hash = 0;
+    int i = 0;
+    while(word[i] != '\0'){
+        hash += (int)word[i];
+        i++;
     }
+    return hash;
 }
 
 void Save(){
@@ -79,33 +107,36 @@ void Save(){
 
 void Load(){
     FILE *arquivo = fopen("texto.txt", "r");
-    if(!arquivo){
+    if (!arquivo){
         mens('f');
         exit(1);
     }
-    char linha[size_hash];
+
+    char word[size_word];
+    char mean[size_mean];
+    int hash = 0;
     int indice = 0;
-    int par = 0;
-    
-    while( fgets(linha, size_mean, arquivo) != NULL ){
-        if(par == 0){
-            indice = MakeHashCode(linha[0]);
-            while (strcmp(hash_table[indice].word, "") != 0 ){
-                indice = MakeHashCode(indice+1);
-            }
-            linha[strcspn(linha, "\n")] = 0;
-            strcpy(hash_table[indice].word, linha);
-            par = 1;
-        }else{
-            linha[strcspn(linha, "\n")] = 0;
-            strcpy(hash_table[indice].mean, linha);
-            par = 0;
+
+    while (fgets(word, size_hash, arquivo) != NULL &&
+           fgets(mean, size_mean, arquivo) != NULL) {
+        word[strcspn(word, "\n")] = 0;
+        mean[strcspn(mean, "\n")] = 0;
+
+        hash = Hash_String(word);
+        indice = MakeHashCode(hash);
+
+        while (hash_table[indice].word[0] != '\0') {
+            indice = Collision_Handler(indice);
         }
+
+        strcpy(hash_table[indice].word, word);
+        strcpy(hash_table[indice].mean, mean);
     }
     fclose(arquivo);
 }
 
-palavra GetWords(){
+
+palavra GetInputValue(){
     palavra p;
 
     printf("# Digite uma palavra: \n>> ");
@@ -120,11 +151,13 @@ palavra GetWords(){
 }
 
 void Insert(){
-    palavra palav = GetWords();
-    int indice = MakeHashCode(palav.word[0]);
+    palavra palav = GetInputValue();
+
+    int hash = Hash_String(palav.word);
+    int indice = MakeHashCode(hash);
 
     while( strcmp(hash_table[indice].word, "") != 0 ){
-        indice = MakeHashCode(indice + 1);
+        indice = Collision_Handler(indice);
     }
     hash_table[indice] = palav;
     mens('s');
@@ -137,8 +170,8 @@ void PrintHash(){
         printf("# %s\n", hash_table[i].word);
         printf("-> %s\n", hash_table[i].mean);
     }
-    printf("\n------------------------------\n");
-} //char letra = 'a'; /&& hash_table[i].word[0] == letra/
+    printf("------------------------------\n");
+}
 
 void Search(){
     char chave[size_word] = "";
@@ -147,7 +180,8 @@ void Search(){
     fgets(chave, size_word, stdin);
     chave[strcspn(chave, "\n")] = 0;
 
-    int indice = MakeHashCode(chave[0]);
+    int hash = Hash_String(chave);
+    int indice = MakeHashCode(hash);
 
     while( strcmp(hash_table[indice].word, "") != 0 ){
         if (  strcmp(hash_table[indice].word, chave) == 0 ){
@@ -157,7 +191,7 @@ void Search(){
             printf("------------------------------\n");
             return;
         }else{
-            indice = MakeHashCode(indice+1);
+            indice = Collision_Handler(indice);
         }
     }
     mens('e');
@@ -165,11 +199,13 @@ void Search(){
 
 void Remove(){
     char chave[size_word] = "";
-     printf("# Pesquise pela palavra: \n>> ");
+
+    printf("# Pesquise pela palavra: \n>> ");
     fgets(chave, size_word, stdin);
     chave[strcspn(chave, "\n")] = 0;
 
-    int indice = MakeHashCode(chave[0]);
+    int hash = Hash_String(chave);
+    int indice = MakeHashCode(hash);
 
     while( strcmp(hash_table[indice].word, "") != 0 ){
         if ( strcmp(hash_table[indice].word, chave) == 0 ){
@@ -178,7 +214,8 @@ void Remove(){
             mens('s');
             return;
         }else{
-            indice = MakeHashCode(indice+1);
+            indice = Collision_Handler(indice);
         }
     }
+    mens('e');
 }
