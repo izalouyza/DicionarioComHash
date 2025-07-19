@@ -1,6 +1,9 @@
 /* Aplicar tabelas hash em uma aplicação real e Manipular dados textuais usando hashing.
 Crie um programa que funcione como um dicionário: o usuário pode adicionar palavras e seus
 significados, buscar e remover termos. Utilize uma tabela hash para organizar os dados.
+
+-> Salvar e carregar o dicionário de um arquivo;
+-> Suportar múltiplos significados por palavra.
 --------------------------------------------------------------------------------------*/
 
 // BIBLIOTECAS E MÓDULOS
@@ -12,7 +15,7 @@ significados, buscar e remover termos. Utilize uma tabela hash para organizar os
 // DECLARAÇÃO DE CONSTANTES
 #define suces "\n>> Operação realizada com sucesso.\n\n"
 #define falha "\n>> Algo deu errado, tente novamente.\n\n"
-#define vazio "\n>> Nenhum item cadastrado no momento.\n\n"
+#define vazio "\n>> Nenhum item encontrado.\n\n"
 #define max 50
 
 // DECLARAÇÃO DE ESTRUTURAS
@@ -25,50 +28,80 @@ typedef struct dicio{
 dicio *inicio = NULL;
 
 // ========================= PROTÓTIPOS DE FUNÇÕES ========================= //
+void Carregar();
 void Cadastrar();           // SALVAR TEMPORARIAMENTE NA LISTA
 void Remover();             // FUNÇÃO ONDE DEVERÁ SER IMPLEMENTADO A HASH
+// void Ordenar();            // ORGANIZA EM ORDEM ALFABÉTICA
 void Exibir();              // EXIBIR CONTÉUDO DA LISTA E DO ARQUIVO
-void Salvar(dicio *atual);  // SALVAR CONTÉUDO DA ESTRUTURA PARA O ARQUIVO
-void Liberar();             // LIBERAR MEMÓRIA DAS ESTRUTURAS
+void Atualizar();           // ATUALIZAR ALGUMA PALAVRA OU SIGNIFICADO
+void Salvar();              // LIBERAR MEMÓRIA DAS ESTRUTURAS
    
 // ================================== FUNÇÃO PRINCIPAL ================================== //
 int main(){
     setlocale(LC_ALL, "");
     int opc = 0;
+    Carregar();
     printf("\n========== DICIONÁRIO DIGITAL ==========\n\n");
     while(1){
-        printf("[1] Cadastrar\n[2] Remover \n[3] Exibir \n[4] Sair \n>> ");
+        printf("[1] Cadastrar\n[2] Remover \n[3] Exibir \n[4] Atualizar \n[5] Sair \n>> ");
         while(scanf("%d", &opc) != 1) {printf("%s", falha); setbuf(stdin, NULL);}
         setbuf(stdin, NULL);
         switch (opc){
             case 1:   Cadastrar();              break;
             case 2:     Remover();              break;
             case 3:      Exibir();              break;
-            case 4:     Liberar(); return 0;    break;
+            case 4:   Atualizar();              break;
+            case 5:      Salvar(); return 0;    break;
             default:    printf("%s", falha);    break;
         }
     }
 }
 
 // ================================= FUNÇÕES AUXILIARES ================================= //
+void Carregar(){
+    FILE *arquivo = fopen("texto.txt", "r");
+    if (arquivo == NULL) {printf("%s", vazio); return;}
+    char linha[max*3];
+    int paridade = 1;
+    dicio *novo = NULL, *ultimo = NULL;
+    while (fgets(linha, max*3, arquivo) != NULL) {
+        if (paridade == 1) { // 1 (palavra) / 0 (significado)
+            novo = malloc(sizeof(dicio));
+            if (novo == NULL) {printf("%s", falha); fclose(arquivo); exit(1);}
+            strcpy(novo->palavra, linha);
+            novo->palavra[strcspn(novo->palavra, "\n")] = 0;
+            novo->prox = NULL;
+            if (inicio == NULL) {inicio = novo;} else {ultimo->prox = novo;}
+            ultimo = novo;
+            paridade = 0;
+        }else{
+            strcpy(novo->signif, linha);
+            novo->signif[strcspn(novo->signif, "\n")] = 0;
+            paridade = 1;
+        }
+    }
+    fclose(arquivo);
+}
+
+void Inserir(dicio *no){
+    printf("Digite uma palavra. \n>> ");
+    fgets(no->palavra, max, stdin);
+    no->palavra[strcspn(no->palavra, "\n")] = 0;
+    
+    printf("Digite uma palavra. \n>> ");
+    fgets(no->signif, max, stdin);
+    no->signif[strcspn(no->signif, "\n")] = 0;
+}
+
 void Cadastrar(){
     dicio *novo = malloc(sizeof(dicio));
     if(novo == NULL) {printf("%s (novo)\n", falha); return;}
-
-    printf("Digite uma palavra. \n>> ");
-    fgets(novo->palavra, max, stdin);
-    novo->palavra[strcspn(novo->palavra, "\n")] = 0;
-    
-    printf("Digite o significado. \n>> ");
-    fgets(novo->signif, max, stdin);
-    novo->signif[strcspn(novo->signif, "\n")] = 0;
-
+    Inserir(novo);
     novo->prox = inicio;
     inicio = novo;
-    
     printf("%s", suces);
 }
-// IDEIA: SE UMA PALAVRA DA LISTA ENCADEADA FOR REMOVIDA, A MESMA NO ARQUIVO SERÁ REMOVIDO AUTOMATICAMENTE
+
 void Remover(){ // AQUI DEVERÁ SER IMPLEMENTADO O ALGORITMO HASH
     if(inicio == NULL) {printf("%s", vazio); return;}
     
@@ -83,7 +116,7 @@ void Remover(){ // AQUI DEVERÁ SER IMPLEMENTADO O ALGORITMO HASH
         anter = atual;
         atual = atual->prox;            
     }
-    if (atual == NULL) {printf("\n>> Não encontrado.\n\n"); return;}
+    if (atual == NULL) {printf("%s", vazio); return;}
     else{
         int opc = 0;
         printf("Tem certeza de que deseja remover { %s }? \n[1] Sim \n[0] Não \n>> ", atual->palavra);
@@ -101,59 +134,49 @@ void Remover(){ // AQUI DEVERÁ SER IMPLEMENTADO O ALGORITMO HASH
 }
  
 void Exibir(){ // A ESTÉTICA DE EXIBIÇÃO DOS RESULTADOS PODE SER APRIMORADA
-    FILE *arquivo = fopen("texto.txt", "r");
-    if(arquivo == NULL) { printf("%s (arquivo)\n", falha); exit(1); }
-    
-    char c = fgetc(arquivo);
-    if(c == EOF && inicio == NULL) {
-        printf("%s", vazio); 
-        fclose(arquivo); 
-        return;
-    }
-
-    if(c != EOF){
-        printf("\n>> Conteúdo do arquivo:\n\n");
-        while(c != EOF){ 
-            printf("%c", c); 
-            c = fgetc(arquivo); 
-        }
-    }
-    fclose(arquivo);
-    
     if(inicio != NULL){
-        printf("\n>> Conteúdo da lista:\n\n");
+        printf("\n%25s\n", "DICIONÁRIO ELETRÔNICO");
+        printf("--------------------------------------------------\n");
         dicio *atual = inicio;
         while(atual){
-            printf("Palavra: %s\n", atual->palavra);
-            printf("Significado: %s\n", atual->signif);
-            printf("------------\n\n");
+            printf("# %-25s -> %s\n", atual->palavra, atual->signif);
             atual = atual->prox;
         }
-    }
+        printf("--------------------------------------------------\n");
+        printf("%s", suces);
+    }else{printf("%s", vazio);}
+}
+
+void Atualizar(){
+    if(inicio == NULL) {printf("%s", vazio); return;}
+    
+    char palvr[max] = " ";
+    printf("Qual palavra deseja atualizar? \n>> ");
+    fgets(palvr, max, stdin);
+    palvr[strcspn(palvr, "\n")] = 0;
+
+    dicio *atual = inicio;
+
+    while(atual && strcmp(atual->palavra, palvr) != 0) {atual = atual->prox;}
+    if (atual != NULL) {Inserir(atual);} else {printf("%s", vazio); return;}
     printf("%s", suces);
 }
 
-void Salvar(dicio *atual){
-    FILE *arquivo = fopen("texto.txt", "a");
-    if(arquivo == NULL) { printf("%s (arquivo)\n", falha); exit(1); }
-    
-    fprintf(arquivo, "%s: ", atual->palavra);
-    fprintf(arquivo, "%s\n", atual->signif);
-
-    fclose(arquivo);
-}
-
-void Liberar(){
+void Salvar(){
+    FILE *arquivo = fopen("texto.txt", "w");
+    if(arquivo == NULL) {printf("%s (arquivo)\n", falha); exit(1);}
     if(inicio != NULL){
         dicio *atual = inicio, *temp = NULL;
         while (atual) {
-            temp = atual;
-            Salvar(atual);
+            temp = atual->prox;
+            fprintf(arquivo, "%s\n", atual->palavra);
+            fprintf(arquivo, "%s\n", atual->signif);
             free(atual);
-            atual = temp->prox;
+            atual = temp;
         }
     }
-    printf("\n>> Conteúdo salvo.\n\n");
+    fclose(arquivo);
+    printf("\n>> Conteúdo salvo.\n");
     printf("%s", suces);
 }
 
@@ -169,7 +192,7 @@ fprintf(arquivo, "%s", novo->signif);
 fclose(arquivo);
 
 FILE *arquivo = fopen("texto.txt", "r");
-if(arquivo == NULL) { printf("%s", falha); exit(1); }
+if(a1rquivo == NULL) { printf("%s", falha); exit(1); }
 char c = fgetc(arquivo);
 while(c != EOF) { printf("%c", c); c = fgetc(arquivo); }
 fclose(arquivo);
