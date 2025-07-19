@@ -1,6 +1,6 @@
 # Dicionário com Hash
 
-Este repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto consiste em desenvolver um dicionário digital onde o usuário pode cadastrar palavras e seus significados, buscar e remover termos.
+Este repositório refere-se ao trabalho da disciplina de **Laboratório de Algoritmos e Estruturas de Dados II (PEX1247)**. O projeto consiste em desenvolver um dicionário digital onde o usuário pode cadastrar palavras e seus significados, buscar e remover termos.
 
 O sistema de dicionário digital apresenta:
 
