@@ -3,7 +3,6 @@
 Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto é destinado a desenvolver um dicionário utilizando a estrutura de dados hash, com funcionalidades para cadastrar, remover, exibir palavras e seus significados, armazenando os dados em arquivo texto.
 
 ---
-
 ## 👨‍👧‍👧 Autores
 
 👨‍🏫 **Professor:** Kennedy Reurison Lopes
@@ -12,6 +11,7 @@ Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. 
 🔹 [Izadora Louyza Silva Figueiredo](https://github.com/liyuhi)  
 🔹 [Lívian Maria Lucena Gomes Pinheiro](https://github.com/livianlucena)   
 🔹 [Victor Hugo de Oliveira](https://github.com/Victor350br)
+
 ---
 
 ## 1. Funcionalidades
