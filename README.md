@@ -30,7 +30,7 @@ Este repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. 
 O usuário interage através de um menu no terminal, escolhendo entre as opções disponíveis (Cadastrar, Remover, Exibir, Sair).  
 
 - As palavras e significados são armazenados temporariamente em uma lista encadeada durante a execução.  
-- Ao sair, os dados da lista são salvos no arquivo `Texto.txt` para persistência entre execuções.  
+- Ao sair, os dados da lista são salvos no arquivo `texto.txt` para persistência entre execuções.  
 - A exibição pode mostrar o conteúdo tanto da lista em memória quanto do arquivo texto.  
 
 ---
@@ -45,7 +45,7 @@ O usuário interage através de um menu no terminal, escolhendo entre as opçõe
 DicionarioComHash/
 ├── dicionariohash/ # Código-fonte principal
 │ └── main.c # Código do dicionário com lista encadeada
-├── Texto.txt # Arquivo texto onde os dados são salvos
+├── texto.txt # Arquivo texto onde os dados são salvos
 ├── README.md # Documentação do projeto
 
 ```
