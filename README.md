@@ -46,8 +46,6 @@ O usuário interage com o sistema via menu no terminal:
 
 ---
 
-### 2.1 Exemplo de Fluxo de Uso
-
 ### 2.1 Exemplo de fluxo de uso
 
 - O usuário inicia o programa e recebe o menu.
