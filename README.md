@@ -36,12 +36,12 @@ O usuário terá acesso a uma interface interativa onde poderá visualizar as fu
 
 
 ### 2.2 Estrutura de pastas
-
+```
 DicionarioComHash/
 ├── dicionariohash/        # Pasta com o código-fonte principal
 │   └── main.c             # Código do menu principal do dicionário
 ├── README.md              # Documentação inicial do projeto
-
+```
 
 ### 2.3 Funcionamento do sistema
 
