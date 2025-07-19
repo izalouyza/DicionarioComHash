@@ -68,7 +68,7 @@ int main(){
 
 // ================================= FUNÇÕES AUXILIARES ================================= //
 void Carregar(){
-    FILE *arquivo = fopen("Texto.txt", "r");
+    FILE *arquivo = fopen("texto.txt", "r");
     if (arquivo == NULL) {printf("%s", vazio); return;}
     char linha[max*3];
     dicio *novo = NULL, *ultimo = NULL;
@@ -191,7 +191,7 @@ void Buscar(){
 }
 
 void Salvar(){
-    FILE *arquivo = fopen("Texto.txt", "w");
+    FILE *arquivo = fopen("texto.txt", "w");
     if(arquivo == NULL) {printf("%s (arquivo)\n", falha); exit(1);}
     if(inicio != NULL){
         dicio *atual = inicio, *temp = NULL;
@@ -217,7 +217,7 @@ void Salvar(){
 // ==================== CODIGOS DE REFERÊNCIA COM POSSÍVEIS UTILIDADES NO FUTURO ====================
 
 /*
-FILE *arquivo = fopen("Texto.txt", "a");
+FILE *arquivo = fopen("texto.txt", "a");
 if(arquivo == NULL){ printf("%s", falha); exit(1); }
 
 fprintf(arquivo, "\n%s: ", novo->palavra);
@@ -225,7 +225,7 @@ fprintf(arquivo, "%s", novo->signif);
 
 fclose(arquivo);
 
-FILE *arquivo = fopen("Texto.txt", "r");
+FILE *arquivo = fopen("texto.txt", "r");
 if(a1rquivo == NULL) { printf("%s", falha); exit(1); }
 char c = fgetc(arquivo);
 while(c != EOF) { printf("%c", c); c = fgetc(arquivo); }
