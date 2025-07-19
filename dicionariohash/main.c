@@ -101,7 +101,7 @@ void Remover(){ // AQUI DEVERÁ SER IMPLEMENTADO O ALGORITMO HASH
 }
  
 void Exibir(){ // A ESTÉTICA DE EXIBIÇÃO DOS RESULTADOS PODE SER APRIMORADA
-    FILE *arquivo = fopen("Texto.txt", "r");
+    FILE *arquivo = fopen("texto.txt", "r");
     if(arquivo == NULL) { printf("%s (arquivo)\n", falha); exit(1); }
     
     char c = fgetc(arquivo);
@@ -134,7 +134,7 @@ void Exibir(){ // A ESTÉTICA DE EXIBIÇÃO DOS RESULTADOS PODE SER APRIMORADA
 }
 
 void Salvar(dicio *atual){
-    FILE *arquivo = fopen("Texto.txt", "a");
+    FILE *arquivo = fopen("texto.txt", "a");
     if(arquivo == NULL) { printf("%s (arquivo)\n", falha); exit(1); }
     
     fprintf(arquivo, "%s: ", atual->palavra);
@@ -160,7 +160,7 @@ void Liberar(){
 // ==================== CODIGOS DE REFERÊNCIA COM POSSÍVEIS UTILIDADES NO FUTURO ====================
 
 /*
-FILE *arquivo = fopen("Texto.txt", "a");
+FILE *arquivo = fopen("texto.txt", "a");
 if(arquivo == NULL){ printf("%s", falha); exit(1); }
 
 fprintf(arquivo, "\n%s: ", novo->palavra);
@@ -168,7 +168,7 @@ fprintf(arquivo, "%s", novo->signif);
 
 fclose(arquivo);
 
-FILE *arquivo = fopen("Texto.txt", "r");
+FILE *arquivo = fopen("texto.txt", "r");
 if(arquivo == NULL) { printf("%s", falha); exit(1); }
 char c = fgetc(arquivo);
 while(c != EOF) { printf("%c", c); c = fgetc(arquivo); }

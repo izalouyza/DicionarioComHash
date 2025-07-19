@@ -1,6 +1,6 @@
 # Dicionário com Hash
 
-Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto é destinado a desenvolver um dicionário utilizando a estrutura de dados hash, com funcionalidades para cadastrar, remover, exibir palavras e seus significados, armazenando os dados em arquivo texto.
+Este repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. O projeto consiste em desenvolver um dicionário digital onde o usuário pode cadastrar palavras e seus significados, buscar e remover termos. Nesta terceira versão, é utilizada uma estrutura de dados lista encadeada para organizar os dados, com funcionalidades para salvar os dados em arquivo texto, garantindo persistência entre execuções.
 
 ---
 ## 👨‍👧‍👧 Autores
@@ -16,20 +16,25 @@ Esse repositório refere-se ao trabalho da disciplina de Estrutura de Dados II. 
 
 ## 1. Funcionalidades
 
-| Funcionalidade | Características                                                                                           |
-|----------------|----------------------------------------------------------------------------------------------------------|
-| Cadastrar      | Permite adicionar uma nova palavra e seu significado ao dicionário, salvando os dados em arquivo texto. |
-| Remover        | (Em desenvolvimento) Permite remover uma palavra do dicionário.                                         |
-| Exibir         | Exibe todas as palavras e significados cadastrados, lendo os dados do arquivo texto.                     |
-| Sair           | Encerra a execução do programa.                                                                          |
+| Funcionalidade | Descrição                                                                                               |
+|---------------|--------------------------------------------------------------------------------------------------------|
+| Cadastrar     | Permite adicionar uma nova palavra e seu significado ao dicionário, armazenando na lista encadeada.    |
+| Remover       | Remove uma palavra da lista encadeada, com confirmação do usuário, e atualiza a estrutura em memória. |
+| Exibir        | Exibe todas as palavras e significados armazenados na lista e lê o conteúdo do arquivo texto.          |
+| Sair          | Salva os dados no arquivo texto e encerra o programa.                                                 |
 
 ---
 
-## 2. Como o sistema funciona?
+## 2. Funcionamento do Sistema
 
-O usuário interage via menu no terminal, podendo escolher entre as opções disponíveis (Cadastrar, Remover, Exibir, Sair). As palavras e significados cadastrados são armazenados em um arquivo texto chamado `Texto.txt`, permitindo persistência dos dados entre execuções.
+O usuário interage através de um menu no terminal, escolhendo entre as opções disponíveis (Cadastrar, Remover, Exibir, Sair).  
+
+- As palavras e significados são armazenados temporariamente em uma lista encadeada durante a execução.  
+- Ao sair, os dados da lista são salvos no arquivo `texto.txt` para persistência entre execuções.  
+- A exibição pode mostrar o conteúdo tanto da lista em memória quanto do arquivo texto.  
 
 ---
+
 
 ### 2.1 Exemplo de Fluxo de Uso
 
@@ -38,9 +43,11 @@ O usuário interage via menu no terminal, podendo escolher entre as opções dis
 ### 2.2 Estrutura de pastas
 ```
 DicionarioComHash/
-├── dicionariohash/ # Pasta com o código-fonte principal
-│ └── main.c # Código do dicionário com funções de cadastro, remoção e exibição
-├── README.md # Documentação inicial do projeto
+├── dicionariohash/ # Código-fonte principal
+│ └── main.c # Código do dicionário com lista encadeada
+├── texto.txt # Arquivo texto onde os dados são salvos
+├── README.md # Documentação do projeto
+
 ```
 
 ### 2.3 Funcionamento do sistema
