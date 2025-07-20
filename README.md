@@ -28,12 +28,12 @@ O sistema de dicionário digital apresenta:
 ## 1. Funcionalidades
 
 | Funcionalidade | Descrição                                                                                  |
-|----------------|-------------------------------------------------------------------------------------------|
+|----------------|---------------------------------------------------------------------------------------------|
 | Cadastrar      | Adiciona uma nova palavra e seu significado na tabela hash, tratando colisões com sondagem linear. |
 | Exibir         | Exibe todas as palavras e significados armazenados na tabela hash.                         |
 | Buscar         | Pesquisa por uma palavra na tabela hash, exibindo seu significado, se encontrada.          |
 | Remover        | Remove uma palavra do dicionário, liberando a posição na tabela hash.                      |
-| Sair           | Salva o conteúdo do dicionário em arquivo texto (`texto.txt`) e encerra o programa.       |
+| Sair           | Salva o conteúdo do dicionário em arquivo texto (`texto.txt`) e encerra o programa.        |
 
 ---
 
