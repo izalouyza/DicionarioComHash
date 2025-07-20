@@ -1,18 +1,3 @@
-/* Aplicar tabelas hash em uma aplicação real e Manipular dados textuais usando hashing.
-Crie um programa que funcione como um dicionário: o usuário pode adicionar palavras e seus
-significados, buscar e remover termos. Utilize uma tabela hash para organizar os dados.
-
-EXTRAS OPCIONAIS
--> Salvar e carregar o dicionário de um arquivo; (OK)
--> Suportar múltiplos significados por palavra.
-
-CRITÉRIOS DE AVALIAÇÃO:
-? Funcionamento correto das operações (30%)
-? Uso eficaz de hash (20%)
-? Interface amigável no terminal (20%)
-? Relatório com análise e exemplos (30%)
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -42,7 +27,6 @@ palavra hash_table[size_hash];
 void Save();
 void Load();
 int Hash_String(const char *word);
-int Collision_Handler(int indice);
 int MakeHashCode(int chave);
 palavra GetInputValue();
 void Insert();
@@ -51,7 +35,9 @@ void Search();
 void Remove();
 
 int main(){
-    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "pt_BR.UTF-8"); // Configurar a localidade para português
+    system("chcp 65001"); // Mudar a página de código para UTF-8
+
     Load();
     char opc = ' ';
     do{
@@ -75,19 +61,108 @@ int MakeHashCode(int chave){
     return (chave % size_hash);
 }
 
-int Collision_Handler(int indice){
-    mens('c');
-    return MakeHashCode(indice + 1);
-}
-
 int Hash_String(const char *word){
     int hash = 0;
-    int i = 0;
-    while(word[i] != '\0'){
+    for (int i = 0; word[i] != '\0'; i++)
         hash += (int)word[i];
-        i++;
-    }
     return hash;
+}
+
+palavra GetInputValue(){
+    palavra p;
+    printf("# Digite uma palavra: \n>> ");
+    fgets(p.word, size_word, stdin);
+    p.word[strcspn(p.word, "\n")] = 0;
+
+    printf("# Digite o significado: \n>> ");
+    fgets(p.mean, size_mean, stdin);
+    p.mean[strcspn(p.mean, "\n")] = 0;
+
+    return p;
+}
+
+void Insert(){
+    palavra palav = GetInputValue();
+    int hash = Hash_String(palav.word);
+    int indice = MakeHashCode(hash);
+
+    int tentativas = 0;
+    while (tentativas < size_hash) {
+        if (strcmp(hash_table[indice].word, "") == 0) {
+            hash_table[indice] = palav;
+            mens('s');
+            return;
+        } else {
+            mens('c');
+            indice = (indice + 1) % size_hash;
+            tentativas++;
+        }
+    }
+    mens('f'); // tabela cheia
+}
+
+void PrintHash(){
+    printf("\n%15s\n", "Conteúdo do dicionário: ");
+    for(int i = 0; i < size_hash; i++){
+        if (strcmp(hash_table[i].word, "") != 0) {
+            printf("# %s\n", hash_table[i].word);
+            printf("-> %s\n", hash_table[i].mean);
+        }
+    }
+    printf("------------------------------\n");
+}
+
+void Search(){
+    char chave[size_word];
+    printf("# Pesquise pela palavra: \n>> ");
+    fgets(chave, size_word, stdin);
+    chave[strcspn(chave, "\n")] = 0;
+
+    int hash = Hash_String(chave);
+    int indice = MakeHashCode(hash);
+
+    int tentativas = 0;
+    while (tentativas < size_hash) {
+        if (strcmp(hash_table[indice].word, "") == 0) {
+            break; // posição vazia = não encontrado
+        }
+        if (strcmp(hash_table[indice].word, chave) == 0) {
+            printf("\n>> RESULTADO OBTIDO:\n\n");
+            printf("# %s\n", hash_table[indice].word);
+            printf("-> %s\n", hash_table[indice].mean);
+            printf("------------------------------\n");
+            return;
+        }
+        indice = (indice + 1) % size_hash;
+        tentativas++;
+    }
+    mens('e');
+}
+
+void Remove(){
+    char chave[size_word];
+    printf("# Pesquise pela palavra: \n>> ");
+    fgets(chave, size_word, stdin);
+    chave[strcspn(chave, "\n")] = 0;
+
+    int hash = Hash_String(chave);
+    int indice = MakeHashCode(hash);
+
+    int tentativas = 0;
+    while (tentativas < size_hash) {
+        if (strcmp(hash_table[indice].word, "") == 0) {
+            break;
+        }
+        if (strcmp(hash_table[indice].word, chave) == 0) {
+            strcpy(hash_table[indice].word, "");
+            strcpy(hash_table[indice].mean, "");
+            mens('s');
+            return;
+        }
+        indice = (indice + 1) % size_hash;
+        tentativas++;
+    }
+    mens('e');
 }
 
 void Save(){
@@ -96,126 +171,41 @@ void Save(){
         mens('f');
         exit(1);
     }
-
     for(int i = 0; i < size_hash; i++){
         fprintf(arquivo, "%s\n", hash_table[i].word);
         fprintf(arquivo, "%s\n", hash_table[i].mean);
     }
-
     fclose(arquivo);
 }
 
 void Load(){
     FILE *arquivo = fopen("texto.txt", "r");
     if (!arquivo){
-        mens('f');
-        exit(1);
+        // Se o arquivo ainda não existir, considere isso OK.
+        return;
     }
 
     char word[size_word];
     char mean[size_mean];
-    int hash = 0;
-    int indice = 0;
 
-    while (fgets(word, size_hash, arquivo) != NULL &&
+    while (fgets(word, size_word, arquivo) != NULL &&
            fgets(mean, size_mean, arquivo) != NULL) {
         word[strcspn(word, "\n")] = 0;
         mean[strcspn(mean, "\n")] = 0;
 
-        hash = Hash_String(word);
-        indice = MakeHashCode(hash);
+        int hash = Hash_String(word);
+        int indice = MakeHashCode(hash);
+        int tentativas = 0;
 
-        while (hash_table[indice].word[0] != '\0') {
-            indice = Collision_Handler(indice);
+        while (tentativas < size_hash) {
+            if (strcmp(hash_table[indice].word, "") == 0) {
+                strcpy(hash_table[indice].word, word);
+                strcpy(hash_table[indice].mean, mean);
+                break;
+            }
+            indice = (indice + 1) % size_hash;
+            tentativas++;
         }
-
-        strcpy(hash_table[indice].word, word);
-        strcpy(hash_table[indice].mean, mean);
     }
     fclose(arquivo);
-}
-
-
-palavra GetInputValue(){
-    palavra p;
-
-    printf("# Digite uma palavra: \n>> ");
-    fgets(p.word, size_word, stdin);
-    p.word[strcspn(p.word, "\n")] = 0;
-
-    printf("# Digite o significado: \n>> ");
-    fgets(p.mean, size_word, stdin);
-    p.mean[strcspn(p.mean, "\n")] = 0;
-
-    return p;
-}
-
-void Insert(){
-    palavra palav = GetInputValue();
-
-    int hash = Hash_String(palav.word);
-    int indice = MakeHashCode(hash);
-
-    while( strcmp(hash_table[indice].word, "") != 0 ){
-        indice = Collision_Handler(indice);
-    }
-    hash_table[indice] = palav;
-    mens('s');
-}
-
-void PrintHash(){
-    printf("\n%15s\n", "Conteúdo do dicionário: ");
-    
-    for(int i = 0; i < size_hash; i++){
-        printf("# %s\n", hash_table[i].word);
-        printf("-> %s\n", hash_table[i].mean);
-    }
-    printf("------------------------------\n");
-}
-
-void Search(){
-    char chave[size_word] = "";
-
-    printf("# Pesquise pela palavra: \n>> ");
-    fgets(chave, size_word, stdin);
-    chave[strcspn(chave, "\n")] = 0;
-
-    int hash = Hash_String(chave);
-    int indice = MakeHashCode(hash);
-
-    while( strcmp(hash_table[indice].word, "") != 0 ){
-        if (  strcmp(hash_table[indice].word, chave) == 0 ){
-            printf("\n>> RESULTADO OBTIDO:\n\n");
-            printf("# %s\n", hash_table[indice].word);
-            printf("-> %s\n", hash_table[indice].mean);
-            printf("------------------------------\n");
-            return;
-        }else{
-            indice = Collision_Handler(indice);
-        }
-    }
-    mens('e');
-}
-
-void Remove(){
-    char chave[size_word] = "";
-
-    printf("# Pesquise pela palavra: \n>> ");
-    fgets(chave, size_word, stdin);
-    chave[strcspn(chave, "\n")] = 0;
-
-    int hash = Hash_String(chave);
-    int indice = MakeHashCode(hash);
-
-    while( strcmp(hash_table[indice].word, "") != 0 ){
-        if ( strcmp(hash_table[indice].word, chave) == 0 ){
-            strcpy(hash_table[indice].word, "");
-            strcpy(hash_table[indice].mean, "");
-            mens('s');
-            return;
-        }else{
-            indice = Collision_Handler(indice);
-        }
-    }
-    mens('e');
 }
