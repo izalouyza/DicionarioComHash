@@ -1,20 +1,22 @@
 # Dicionário com Hash
 
-Este repositório refere-se ao trabalho da disciplina de **Laboratório de Algoritmos e Estruturas de Dados II (PEX1247)**. O projeto consiste em desenvolver um dicionário digital onde o usuário pode cadastrar palavras e seus significados, buscar e remover termos.
-
-O sistema de dicionário digital apresenta:
-
-- Função **Hash_String** que calcula o hash pela soma dos códigos ASCII dos caracteres da palavra.
-- Implementação de **tratamento de colisões** com sondagem linear e aviso de colisão.
-- Persistência completa dos dados em arquivo texto (`texto.txt`), com carregamento na inicialização e salvamento ao sair.
-- Funcionalidades completas para **cadastrar**, **exibir**, **buscar** e **remover** palavras.
-- Interface amigável com mensagens específicas para sucesso, erro, colisão e item não encontrado.
-- Estrutura simplificada, onde cada palavra possui um único significado.
-- Inicialização da tabela com valores vazios para evitar dados inconsistentes.
-- Tratamento adequado de entrada de dados e limpeza do buffer para evitar erros na leitura.
+Repositório do projeto desenvolvido ao longo da 2ª e 3ª unidades da disciplina **Laboratório de Algoritmos e Estruturas de Dados II (PEX1247)**. Este sistema simula um **dicionário digital**, permitindo ao usuário **cadastrar, buscar, remover** e **exibir palavras e seus significados**, utilizando uma **tabela hash com tratamento de colisões** e **persistência em arquivo**.
 
 ---
-## 👨‍👧‍👧 Autores
+
+## Funcionalidades Principais do Projeto
+
+- Cálculo de hash por soma de códigos ASCII (**Hash_String**).
+- Tratamento de colisões com **sondagem linear** e aviso visual.
+- Persistência de dados em arquivo `texto.txt`, com **carregamento automático na inicialização** e salvamento ao sair.
+- Operações completas: **cadastrar**, **buscar**, **remover** e **exibir** palavras.
+- Interface amigável com mensagens claras sobre erros, sucesso, colisões e elementos não encontrados.
+- Inicialização segura da tabela para evitar dados inconsistentes.
+- Leitura de entrada com tratamento de buffer.
+
+---
+
+## 👥 Autores
 
 👨‍🏫 **Professor:** Kennedy Reurison Lopes
 
@@ -25,57 +27,46 @@ O sistema de dicionário digital apresenta:
 
 ---
 
-## 1. Funcionalidades
+## Aprendizados Adquiridos
 
-| Funcionalidade | Descrição                                                                                  |
-|----------------|---------------------------------------------------------------------------------------------|
-| Cadastrar      | Adiciona uma nova palavra e seu significado na tabela hash, tratando colisões com sondagem linear. |
-| Exibir         | Exibe todas as palavras e significados armazenados na tabela hash.                         |
-| Buscar         | Pesquisa por uma palavra na tabela hash, exibindo seu significado, se encontrada.          |
-| Remover        | Remove uma palavra do dicionário, liberando a posição na tabela hash.                      |
-| Sair           | Salva o conteúdo do dicionário em arquivo texto (`texto.txt`) e encerra o programa.        |
+Este projeto permitiu a aplicação prática de conceitos como:
+- Estruturas de dados (tabelas hash e vetores).
+- Manipulação de arquivos em C.
+- Tratamento de colisões.
 
 ---
 
-## 2. Funcionamento do Sistema
+## Problemas Encontrados
+
+Durante o desenvolvimento do projeto, enfrentamos os seguintes desafios:
+
+- **Implementação da Tabela Hash:** ajustes no cálculo do hash e no tratamento de colisões com sondagem linear para evitar sobrescritas e loops infinitos.
+- **Múltiplos Significados:** reestruturação dos dados para suportar mais de um significado por palavra, exigindo alterações nas funções de cadastro, busca e exibição.
+- **Persistência em Arquivo:** dificuldades em criar um formato de leitura/escrita confiável e compatível com as estruturas em memória.
+- **Leitura de Strings:** problemas com `scanf` e `fgets`, exigindo cuidados com o buffer e leitura de entradas com espaços.
+- **Testes e Manutenção:** necessidade de testar todos os fluxos (inclusive com colisões e remoções) e garantir que o sistema permanecesse funcional a cada alteração.
+
+Todos os problemas foram resolvidos com testes, ajustes na lógica e colaboração em equipe.
+
+---
+
+## Funcionalidades do Sistema
+
+| Função     | Descrição                                                                                         |
+|-------------|---------------------------------------------------------------------------------------------------|
+| Cadastrar   | Adiciona uma nova palavra e seu significado.            |
+| Exibir      | Mostra todas as palavras e significados armazenados.                                             |
+| Buscar      | Localiza uma palavra e exibe seu significado, se a palavra estiver cadastrada.                               |
+| Remover     | Exclui uma palavra do dicionário.                                                |
+| Sair        | Salva automaticamente os dados no arquivo `texto.txt` e finaliza o programa.                     |
+
+---
+
+## Funcionamento do Sistema
 
 O usuário interage com o sistema via menu no terminal:
 
-- **Cadastrar**: inserir uma palavra e seu significado.  
-- **Exibir**: listar todas as palavras cadastradas e seus significados.  
-- **Buscar**: procurar uma palavra pelo nome e exibir seu significado.  
-- **Remover**: excluir uma palavra do dicionário.  
-- **Sair**: salva os dados em arquivo e finaliza o programa.
-
----
-
-### 2.1 Exemplo de fluxo de uso
-
-- O usuário inicia o programa e os dados salvos são carregados automaticamente.  
-- Pode cadastrar novas palavras com significado.  
-- Exibir o conteúdo da tabela hash a qualquer momento.  
-- Buscar uma palavra específica.  
-- Remover palavras do dicionário.  
-- Sair do programa com salvamento automático dos dados.
-
----
-
-### 2.2 Estrutura de pastas
-```
-DicionarioComHash/
-├── dicionariohash/ 
-│ └── main.c 
-└── README.md 
-
-```
-- **main.c**: código-fonte do projeto.
-
----
-### 2.3 Funcionamento do sistema
-
-O sistema de Dicionário Digital permite que o usuário realize as seguintes ações:
-
-```
+```text
 =========================== DICIONÁRIO DIGITAL ===========================
 
 (1) Cadastrar
@@ -85,49 +76,55 @@ O sistema de Dicionário Digital permite que o usuário realize as seguintes aç
 (5) Sair
 
 << Informe a opção:
-
 ```
-
-#### Menu principal do sistema:
+#### Menu Principal do Sistema:
 
 - **Cadastrar**: inserir uma palavra e seu significado.  
 - **Exibir**: listar todas as palavras cadastradas e seus significados.  
 - **Buscar**: procurar uma palavra pelo nome e exibir seu significado.  
 - **Remover**: excluir uma palavra do dicionário.  
 - **Sair**: salva os dados e finaliza o programa.
+---
+
+## Estrutura de Pastas
+
+```bash
+DicionarioComHash/
+├── dicionariohash/
+│   └── main.c
+└── README.md
+```
+
+- `main.c`: arquivo principal com toda a lógica do programa.
 
 ---
 
-### 3. Como compilar e executar o sistema
+## Como Compilar e Executar
 
-Para compilar e executar o sistema, siga os passos abaixo:
+1. Certifique-se de ter um compilador C instalado (ex: GCC).
 
-1. Primeiramente, certifique-se de ter um ambiente que suporte a linguagem C e um compilador (por exemplo, GCC).
-   
-2. Clone o repositório do projeto:
+2. Clone este repositório:
 
-```
+```bash
 git clone https://github.com/liyuhi/DicionarioComHash
 ```
 
-3. Acesse a pasta do projeto e siga até o diretório onde os códigos estão alocados:
-   
-```
-cd DicionarioComHash
-```
-```
-cd dicionariohash
+3. Acesse a pasta do projeto:
+
+```bash
+cd DicionarioComHash/dicionariohash
 ```
 
-4. Compile o programa:
+4. Compile o código:
 
-```
-gcc -o dicionario main.c 
+```bash
+gcc -o dicionario main.c
 ```
 
 5. Execute o programa:
-   
-```
-.\dicionario
+
+```bash
+.\dicionario 
 ```
 ---
+
