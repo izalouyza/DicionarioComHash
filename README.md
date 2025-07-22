@@ -21,7 +21,7 @@ Repositório do projeto desenvolvido ao longo da 2ª e 3ª unidades da disciplin
 👨‍🏫 **Professor:** Kennedy Reurison Lopes
 
 👩‍🎓 **Discentes:**  
-🔹 [Izadora Louyza Silva Figueiredo](https://github.com/liyuhi) — *GitMaster*  
+🔹 [Izadora Louyza Silva Figueiredo](https://github.com/izalouyza) — *GitMaster*  
 🔹 [Lívian Maria Lucena Gomes Pinheiro](https://github.com/livianlucena) — *Redatora e Apresentadora*  
 🔹 [Victor Hugo de Oliveira](https://github.com/Victor350br) — *Codificador e Apresentador*
 
@@ -106,7 +106,7 @@ DicionarioComHash/
 2. Clone este repositório:
 
 ```bash
-git clone https://github.com/liyuhi/DicionarioComHash
+git clone https://github.com/izalouyza/DicionarioComHash
 ```
 
 3. Acesse a pasta do projeto:
