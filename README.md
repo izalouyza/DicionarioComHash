@@ -18,7 +18,7 @@ Repositório do projeto desenvolvido ao longo da 2ª e 3ª unidades da disciplin
 
 ## 👥 Autores
 
-👨‍🏫 **Professor:** Kennedy Reurison Lopes
+👨‍🏫 **Professor:** [Kennedy Reurison Lopes](https://github.com/kennedyufersa)
 
 👩‍🎓 **Discentes:**  
 🔹 [Izadora Louyza Silva Figueiredo](https://github.com/izalouyza) — *GitMaster*  
