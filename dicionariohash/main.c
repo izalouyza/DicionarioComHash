@@ -166,7 +166,7 @@ void Remove(){
 }
 
 void Save(){
-    FILE *arquivo = fopen("texto.txt", "w");
+    FILE *arquivo = fopen("dicionario.txt", "w");
     if(!arquivo){
         mens('f');
         exit(1);
@@ -179,7 +179,7 @@ void Save(){
 }
 
 void Load(){
-    FILE *arquivo = fopen("texto.txt", "r");
+    FILE *arquivo = fopen("dicionario.txt", "r");
     if (!arquivo){
         // Se o arquivo ainda não existir, considere isso OK.
         return;
