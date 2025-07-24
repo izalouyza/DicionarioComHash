@@ -22,7 +22,7 @@ Repositório do projeto desenvolvido ao longo da 2ª e 3ª unidades da disciplin
 
 👩‍🎓 **Discentes:**  
 🔹 [Izadora Louyza Silva Figueiredo](https://github.com/izalouyza) — *GitMaster*  
-🔹 [Lívian Maria Lucena Gomes Pinheiro](https://github.com/livianlucena) — *Redatora e Apresentadora*  
+🔹 [Lívian Maria Lucena Gomes Pinheiro](https://github.com/livianlucena) — *Redatora*  
 🔹 [Victor Hugo de Oliveira](https://github.com/Victor350br) — *Codificador e Apresentador*
 
 ---
