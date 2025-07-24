@@ -102,7 +102,7 @@ DicionarioComHash/
 - `main.c`: arquivo principal com toda a lógica do programa.
 - `Apresentacao_DicionariocomHash.pdf`: apresentação do projeto em formato PDF.
 - `Relatorio_Dicionario_com_Hash.pdf`: relatório técnico do projeto em formato PDF.
-
+- `README.md`: documento com informações gerais sobre o projeto.
 ---
 
 ## Como Compilar e Executar
