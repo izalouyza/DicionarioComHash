@@ -92,10 +92,16 @@ O usuário interage com o sistema via menu no terminal:
 DicionarioComHash/
 ├── dicionariohash/
 │   └── main.c
+├── documentacao/
+│   ├── Apresentacao_DicionariocomHash.pdf
+│   └── Relatorio_Dicionario_com_Hash.pdf
 └── README.md
 ```
-
+- `dicionariohash/`: pasta que contém o código-fonte do sistema.
+- `documentacao/`:  pasta com os documentos do projeto.
 - `main.c`: arquivo principal com toda a lógica do programa.
+- `Apresentacao_DicionariocomHash.pdf`: apresentação do projeto em formato PDF.
+- `Relatorio_Dicionario_com_Hash.pdf`: relatório técnico do projeto em formato PDF.
 
 ---
 
