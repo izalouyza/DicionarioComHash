@@ -8,7 +8,7 @@ Repositório do projeto desenvolvido ao longo da 2ª e 3ª unidades da disciplin
 
 - Cálculo de hash por soma de códigos ASCII (**Hash_String**).
 - Tratamento de colisões com **sondagem linear** e aviso visual.
-- Persistência de dados em arquivo `texto.txt`, com **carregamento automático na inicialização** e salvamento ao sair.
+- Persistência de dados em arquivo `dicionario.txt`, com **carregamento automático na inicialização** e salvamento ao sair.
 - Operações completas: **cadastrar**, **buscar**, **remover** e **exibir** palavras.
 - Interface amigável com mensagens claras sobre erros, sucesso, colisões e elementos não encontrados.
 - Inicialização segura da tabela para evitar dados inconsistentes.
@@ -58,7 +58,7 @@ Todos os problemas foram resolvidos com testes, ajustes na lógica e colaboraç�
 | Exibir      | Mostra todas as palavras e significados armazenados.                                             |
 | Buscar      | Localiza uma palavra e exibe seu significado, se a palavra estiver cadastrada.                               |
 | Remover     | Exclui uma palavra do dicionário.                                                |
-| Sair        | Salva automaticamente os dados no arquivo `texto.txt` e finaliza o programa.                     |
+| Sair        | Salva automaticamente os dados no arquivo `dicionario.txt` e finaliza o programa.                     |
 
 ---
 
