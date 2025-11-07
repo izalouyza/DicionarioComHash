@@ -3,7 +3,7 @@
 Repositório do projeto desenvolvido ao longo da 2ª e 3ª unidades da disciplina **Laboratório de Algoritmos e Estruturas de Dados II (PEX1247)**. Este sistema simula um **dicionário digital**, permitindo ao usuário **cadastrar, buscar, remover** e **exibir palavras e seus significados**, utilizando uma **tabela hash com tratamento de colisões** e **persistência em arquivo**.
 
 ![Linguagem](https://img.shields.io/badge/Linguagem-C-blue)
-![Ambiente](https://img.shields.io/badge/Ambiente-VSCode_&_LaTeX-blue)
+![Ambiente](https://img.shields.io/badge/Ambientes-VSCode_&_LaTeX-blue)
 ![Último commit](https://img.shields.io/github/last-commit/izalouyza/DicionarioComHash)
 
 ---
