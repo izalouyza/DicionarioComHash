@@ -94,6 +94,7 @@ O usuário interage com o sistema via menu no terminal:
 
 ```bash
 DicionarioComHash/
+src/
 ├── dicionariohash/
 │   └── main.c
 ├── documentacao/
