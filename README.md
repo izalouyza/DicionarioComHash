@@ -1,4 +1,6 @@
-# Dicionário com Hash
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=32CD32&height=200&section=header&text=Dicion%C3%A1rio%20Hash&fontSize=40&fontColor=ffffff" />
+</p>
 
 Repositório do projeto desenvolvido ao longo da 2ª e 3ª unidades da disciplina **Laboratório de Algoritmos e Estruturas de Dados II (PEX1247)**. Este sistema simula um **dicionário digital**, permitindo ao usuário **cadastrar, buscar, remover** e **exibir palavras e seus significados**, utilizando uma **tabela hash com tratamento de colisões** e **persistência em arquivo**.
 
